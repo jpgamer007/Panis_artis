@@ -1,0 +1,192 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Panis Artis | Arte em forma de pão</title>
+<style>
+:root {
+  --papel:#f3e7d0; --marrom:#4b2c1c;
+  --detalhe:#a7825d; --claro:#fff8eb;
+}
+* { box-sizing:border-box }
+body {
+  margin:0; background:var(--papel); color:var(--marrom);
+  font-family:Georgia,'Times New Roman',serif;
+  background-image:repeating-linear-gradient(
+    2deg,transparent,transparent 5px,rgba(75,44,28,.025) 6px
+  );
+}
+header { text-align:center; padding:35px 15px 20px }
+.logo {
+  border:2px solid var(--marrom); border-radius:50%;
+  width:85px;height:85px;margin:auto;display:grid;
+  place-items:center;font-size:35px;font-weight:bold;
+  box-shadow:inset 0 0 0 4px var(--papel),inset 0 0 0 5px var(--marrom);
+}
+h1 { font-size:clamp(30px,7vw,48px);letter-spacing:3px;margin:15px 0 5px }
+.slogan { font-style:italic;color:#795b45 }
+hr { border:0;border-top:1px solid var(--detalhe);max-width:400px;margin:18px auto }
+h2 { text-align:center;font-size:30px;font-style:italic;font-weight:normal }
+.intro { text-align:center;line-height:1.6;padding:0 18px;color:#795b45 }
+main { max-width:1000px;margin:25px auto;padding:0 16px }
+.catalog { display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px }
+.product,.panel {
+  background:rgba(255,248,235,.65);border:1px solid #c7aa86;
+  padding:17px;box-shadow:0 4px 12px #4b2c1c12;
+}
+.product { text-align:center }
+.food { font-size:54px;margin:8px }
+.product h3 { font-size:22px;font-weight:normal;margin:10px 0 }
+.product p { color:#795b45;line-height:1.4;min-height:40px }
+.price { font-size:21px;font-weight:bold;margin:12px }
+button {
+  padding:11px 15px;border:1px solid var(--marrom);
+  background:var(--marrom);color:var(--papel);
+  font:inherit;cursor:pointer;margin:4px;
+}
+button.secondary { background:transparent;color:var(--marrom) }
+button:hover { opacity:.85 }
+.panel { margin-top:24px }
+.panel h2 { margin-top:4px }
+.cartrow { display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px dotted #c7aa86 }
+.qty { display:flex;align-items:center;gap:5px }
+.qty button { padding:3px 10px;margin:0 }
+.total { display:flex;justify-content:space-between;font-size:23px;margin:20px 0 }
+.wide { width:100%;margin:5px 0 }
+#payment { display:none;text-align:center }
+#qrcode { display:flex;justify-content:center;margin:18px auto }
+textarea { width:100%;min-height:85px;padding:10px;background:var(--claro);color:var(--marrom) }
+.notice { font-size:14px;line-height:1.5;color:#795b45 }
+footer { text-align:center;padding:30px 12px;font-style:italic;color:#795b45 }
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">PA</div>
+  <h1>PANIS ARTIS</h1>
+  <hr>
+  <div class="slogan">Arte em forma de pão</div>
+</header>
+
+<h2>Nosso cardápio</h2>
+<p class="intro">Feito artesanalmente, com carinho e dedicação.<br>
+Escolha suas delícias e monte seu pedido.</p>
+
+<main>
+  <div class="catalog" id="catalog"></div>
+
+  <section class="panel">
+    <h2>Seu pedido</h2>
+    <div id="cart">Seu cesto ainda está vazio. 🍪</div>
+    <div class="total"><span>Total</span><strong id="total">R$ 0,00</strong></div>
+    <button class="wide" onclick="makePayment()">Gerar Pix do pedido</button>
+    <button class="wide secondary" onclick="clearCart()">Limpar pedido</button>
+  </section>
+
+  <section class="panel" id="payment">
+    <h2>Pagamento via Pix</h2>
+    <p>Valor do pedido: <strong id="payTotal"></strong></p>
+    <div id="qrcode"></div>
+    <p><strong>Pix Copia e Cola</strong></p>
+    <textarea id="pixCode" readonly></textarea>
+    <button class="wide" onclick="copyPix()">Copiar código Pix</button>
+    <button class="wide secondary" onclick="copyOrder()">Copiar resumo do pedido</button>
+    <p class="notice">Confira o valor e confirme o recebimento no aplicativo do banco antes de entregar o pedido. O site não confirma pagamentos automaticamente.</p>
+  </section>
+</main>
+
+<footer>
+  PANIS ARTIS<br>Produção artesanal · Feito com carinho
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+/* ATENÇÃO: configure sua chave Pix real antes de usar.
+   Esta chave é fictícia e serve somente como marcador de teste. */
+const PIX_KEY = "SUA-CHAVE-PIX-AQUI";
+const PIX_RECEIVER = "PANIS ARTIS";
+const PIX_CITY = "CASIMIRO DE ABREU";
+
+const products = [
+ {id:1,name:"Cinnamon roll",desc:"Massa macia com canela.",price:2.00,emoji:"🥮"},
+ {id:2,name:"Casadinho de goiabada",desc:"Biscoitinho delicado com goiabada.",price:9.99,emoji:"🍪"},
+ {id:3,name:"Biscoitinho amanteigado",desc:"Perfeito para acompanhar um café.",price:7.99,emoji:"🫙"},
+ {id:4,name:"Amanteigado de maizena",desc:"Delicado e que derrete na boca.",price:7.99,emoji:"🍪"}
+];
+const cart = {};
+const brl = n => n.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
+const safe = s => String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+function renderCatalog(){
+ document.getElementById("catalog").innerHTML=products.map(p=>`
+ <article class="product">
+   <div class="food">${p.emoji}</div><h3>${safe(p.name)}</h3>
+   <p>${safe(p.desc)}</p><div class="price">${brl(p.price)}</div>
+   <button onclick="add(${p.id})">Adicionar +</button>
+ </article>`).join("");
+}
+function add(id){cart[id]=(cart[id]||0)+1;renderCart();}
+function change(id,d){cart[id]=(cart[id]||0)+d;if(cart[id]<=0)delete cart[id];renderCart();}
+function total(){return products.reduce((s,p)=>s+p.price*(cart[p.id]||0),0);}
+function renderCart(){
+ const items=products.filter(p=>cart[p.id]);
+ document.getElementById("cart").innerHTML=items.length?items.map(p=>`
+ <div class="cartrow"><span>${safe(p.name)}<br><small>${brl(p.price)} cada</small></span>
+ <span class="qty"><button class="secondary" onclick="change(${p.id},-1)">−</button>
+ ${cart[p.id]}<button class="secondary" onclick="change(${p.id},1)">+</button></span></div>`).join(""):"Seu cesto ainda está vazio. 🍪";
+ document.getElementById("total").textContent=brl(total());
+}
+function clearCart(){
+ Object.keys(cart).forEach(k=>delete cart[k]);renderCart();
+ document.getElementById("payment").style.display="none";
+}
+function tlv(id,v){v=String(v);return id+String(v.length).padStart(2,"0")+v;}
+function crc16(s){
+ let crc=65535;
+ for(let i=0;i<s.length;i++){
+  crc^=s.charCodeAt(i)<<8;
+  for(let j=0;j<8;j++)crc=(crc&32768)?((crc<<1)^4129):(crc<<1);
+  crc&=65535;
+ }
+ return crc.toString(16).toUpperCase().padStart(4,"0");
+}
+function pixPayload(amount){
+ const account=tlv("00","br.gov.bcb.pix")+tlv("01",PIX_KEY);
+ let s=tlv("00","01")+tlv("01","11")+tlv("26",account)+
+ tlv("52","0000")+tlv("53","986")+tlv("54",amount.toFixed(2))+
+ tlv("58","BR")+tlv("59",PIX_RECEIVER.slice(0,25))+
+ tlv("60",PIX_CITY.slice(0,15))+tlv("62",tlv("05","***"))+"6304";
+ return s+crc16(s);
+}
+function makePayment(){
+ if(total()<=0){alert("Adicione algum produto primeiro.");return;}
+ if(PIX_KEY==="SUA-CHAVE-PIX-AQUI"){
+  alert("O Pix ainda está em modo de teste. Configure sua chave real no código antes de divulgar o site.");
+ }
+ const amount=Math.round(total()*100)/100;
+ document.getElementById("payTotal").textContent=brl(amount);
+ const code=pixPayload(amount);
+ document.getElementById("pixCode").value=code;
+ document.getElementById("payment").style.display="block";
+ const qr=document.getElementById("qrcode");qr.innerHTML="";
+ if(window.QRCode)new QRCode(qr,{text:code,width:210,height:210});
+ else qr.textContent="Conecte-se à internet para carregar o gerador de QR Code.";
+ document.getElementById("payment").scrollIntoView({behavior:"smooth"});
+}
+async function copyPix(){
+ const t=document.getElementById("pixCode");
+ try{await navigator.clipboard.writeText(t.value);alert("Código Pix copiado!");}
+ catch(e){t.select();document.execCommand("copy");alert("Copie o código selecionado.");}
+}
+function copyOrder(){
+ const lines=products.filter(p=>cart[p.id]).map(p=>`${cart[p.id]}x ${p.name} — ${brl(p.price*cart[p.id])}`);
+ if(!lines.length){alert("Seu pedido está vazio.");return;}
+ const summary="PANIS ARTIS — PEDIDO\n"+lines.join("\n")+"\nTOTAL: "+brl(total());
+ window.prompt("Copie o resumo e envie à Panis Artis:",summary);
+}
+renderCatalog();renderCart();
+</script>
+</body>
+</html>
