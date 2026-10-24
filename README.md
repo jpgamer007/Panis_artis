@@ -3,454 +3,352 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#f5eddd">
-  <title>Panis Artis | Pães e Delícias Artesanais</title>
-  <meta name="description" content="Panis Artis — pães e delícias feitos artesanalmente, com carinho e tradição.">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f3e7d0">
+  <meta name="description" content="Panis Artis — arte em forma de pão. Delícias artesanais feitas com carinho.">
+  <title>Panis Artis | Arte em forma de pão</title>
+
   <style>
     :root {
-      --paper: #f5eddd;
-      --paper-light: #fffaf0;
-      --ink: #3e2a1d;
-      --brown: #70472d;
-      --gold: #b18a53;
-      --line: #c9ad80;
-      --muted: #766552;
-      --green: #536345;
+      --papel: #f3e7d0;
+      --marrom: #4b2c1c;
+      --detalhe: #a7825d;
+      --claro: #fff8eb;
+      --texto: #795b45;
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
       margin: 0;
-      background: var(--paper);
-      color: var(--ink);
+      background: var(--papel);
+      color: var(--marrom);
       font-family: Georgia, "Times New Roman", serif;
-      line-height: 1.6;
-    }
-
-    button, input { font: inherit; }
-
-    button { cursor: pointer; }
-
-    .topline {
-      height: 8px;
-      background: var(--brown);
-      border-bottom: 2px solid var(--gold);
+      background-image: repeating-linear-gradient(
+        2deg,
+        transparent,
+        transparent 5px,
+        rgba(75, 44, 28, 0.025) 6px
+      );
     }
 
     header {
       text-align: center;
-      padding: 34px 18px 24px;
-      border-bottom: 1px solid var(--line);
-      background:
-        radial-gradient(ellipse at center, rgba(255,250,240,.8), transparent 75%);
+      padding: 35px 15px 20px;
     }
 
-    .monogram {
-      width: 76px;
-      height: 76px;
-      margin: 0 auto 12px;
+    .logo {
+      border: 2px solid var(--marrom);
+      border-radius: 50%;
+      width: 85px;
+      height: 85px;
+      margin: auto;
       display: grid;
       place-items: center;
-      border: 2px solid var(--brown);
-      outline: 1px solid var(--gold);
-      outline-offset: 4px;
-      border-radius: 50%;
-      font-size: 27px;
+      font-size: 35px;
       font-weight: bold;
-      letter-spacing: 2px;
+      box-shadow:
+        inset 0 0 0 4px var(--papel),
+        inset 0 0 0 5px var(--marrom);
     }
 
     h1 {
-      margin: 0;
-      font-size: clamp(2.3rem, 7vw, 4.3rem);
-      line-height: 1.1;
+      font-size: clamp(30px, 7vw, 48px);
       letter-spacing: 3px;
-      font-weight: normal;
+      margin: 15px 0 5px;
     }
 
-    .subtitle {
-      margin: 12px 0 0;
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      font-size: .75rem;
-      color: var(--brown);
+    .slogan {
+      font-style: italic;
+      color: var(--texto);
     }
 
     nav {
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
-      gap: 25px;
-      padding: 13px;
-      border-bottom: 1px solid var(--line);
-      font-size: .92rem;
+      gap: 22px;
+      padding: 12px;
+      border-top: 1px solid var(--detalhe);
+      border-bottom: 1px solid var(--detalhe);
     }
 
     nav a {
-      color: var(--ink);
+      color: var(--marrom);
       text-decoration: none;
     }
 
-    nav a:hover { color: var(--gold); }
+    nav a:hover {
+      text-decoration: underline;
+    }
 
-    .hero {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 55px 22px 40px;
+    hr {
+      border: 0;
+      border-top: 1px solid var(--detalhe);
+      max-width: 400px;
+      margin: 18px auto;
+    }
+
+    h2 {
       text-align: center;
-    }
-
-    .eyebrow {
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      font-size: .73rem;
-      color: var(--brown);
-    }
-
-    .hero h2 {
-      max-width: 700px;
-      margin: 12px auto;
-      font-size: clamp(2rem, 5vw, 3.3rem);
-      line-height: 1.18;
+      font-size: 30px;
+      font-style: italic;
       font-weight: normal;
     }
 
-    .hero p {
-      max-width: 580px;
-      margin: 15px auto 25px;
-      color: var(--muted);
-    }
-
-    .button {
-      display: inline-block;
-      border: 1px solid var(--brown);
-      background: var(--brown);
-      color: var(--paper-light);
-      padding: 11px 23px;
-      text-decoration: none;
-      transition: .2s;
-    }
-
-    .button:hover {
-      background: var(--ink);
-    }
-
-    .button.secondary {
-      color: var(--brown);
-      background: transparent;
-    }
-
-    .button.secondary:hover {
-      color: var(--paper-light);
-      background: var(--brown);
+    .intro {
+      text-align: center;
+      line-height: 1.7;
+      padding: 0 18px;
+      color: var(--texto);
+      max-width: 650px;
+      margin: auto;
     }
 
     main {
-      max-width: 1100px;
-      margin: auto;
-      padding: 20px;
+      max-width: 1000px;
+      margin: 25px auto;
+      padding: 0 16px;
     }
 
-    .section-title {
-      text-align: center;
-      margin: 35px 0 25px;
-    }
-
-    .section-title h2 {
-      margin: 4px 0;
-      font-size: 2rem;
-      font-weight: normal;
-    }
-
-    .ornament {
-      color: var(--gold);
-      letter-spacing: 8px;
-      font-size: 1.2rem;
-    }
-
-    .products {
+    .catalog {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
-      gap: 20px;
-      margin-bottom: 55px;
+      grid-template-columns: repeat(
+        auto-fit,
+        minmax(min(100%, 240px), 1fr)
+      );
+      gap: 16px;
+    }
+
+    .product,
+    .panel {
+      background: rgba(255, 248, 235, 0.75);
+      border: 1px solid #c7aa86;
+      padding: 17px;
+      box-shadow: 0 4px 12px rgba(75, 44, 28, 0.07);
     }
 
     .product {
-      padding: 22px;
-      background: rgba(255,250,240,.55);
-      border: 1px solid var(--line);
-      outline: 1px solid transparent;
-      outline-offset: -6px;
+      text-align: center;
       display: flex;
       flex-direction: column;
-      min-height: 285px;
     }
 
-    .product:hover {
-      outline-color: var(--line);
-    }
-
-    .product-icon {
-      font-size: 2.8rem;
-      text-align: center;
-      margin: 3px 0 8px;
+    .food {
+      font-size: 54px;
+      margin: 8px;
     }
 
     .product h3 {
-      text-align: center;
-      font-size: 1.3rem;
+      font-size: 22px;
       font-weight: normal;
-      margin: 4px 0 8px;
+      margin: 10px 0;
     }
 
     .product p {
-      color: var(--muted);
-      font-size: .92rem;
-      text-align: center;
-      margin: 0 0 15px;
+      color: var(--texto);
+      line-height: 1.5;
       flex: 1;
     }
 
     .price {
-      display: block;
-      text-align: center;
-      font-size: 1.35rem;
-      color: var(--brown);
-      margin-bottom: 13px;
+      font-size: 21px;
+      font-weight: bold;
+      margin: 12px;
     }
 
-    .add-button {
-      border: 1px solid var(--brown);
+    button {
+      padding: 11px 15px;
+      border: 1px solid var(--marrom);
+      background: var(--marrom);
+      color: var(--papel);
+      font: inherit;
+      cursor: pointer;
+      margin: 4px;
+    }
+
+    button.secondary {
       background: transparent;
-      color: var(--brown);
-      padding: 9px;
-      width: 100%;
+      color: var(--marrom);
     }
 
-    .add-button:hover {
-      background: var(--brown);
-      color: white;
+    button:hover {
+      opacity: 0.85;
     }
 
-    .order {
-      border: 1px solid var(--brown);
-      padding: 25px;
-      background: rgba(255,250,240,.5);
-      margin: 15px 0 50px;
+    button:focus-visible,
+    a:focus-visible {
+      outline: 3px solid var(--detalhe);
+      outline-offset: 3px;
     }
 
-    .order h2 {
-      margin-top: 0;
-      font-weight: normal;
-      text-align: center;
-      font-size: 1.9rem;
+    .panel {
+      margin-top: 24px;
+    }
+
+    .panel h2 {
+      margin-top: 4px;
     }
 
     .empty {
       text-align: center;
-      color: var(--muted);
-      padding: 10px;
+      color: var(--texto);
+      padding: 15px 0;
     }
 
-    .cart-item {
+    .cartrow {
       display: grid;
       grid-template-columns: 1fr auto auto;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       padding: 12px 0;
-      border-bottom: 1px solid var(--line);
+      border-bottom: 1px dotted #c7aa86;
     }
 
-    .cart-name { font-weight: bold; }
-
-    .cart-price {
-      display: block;
-      color: var(--muted);
-      font-size: .88rem;
-      font-weight: normal;
-    }
-
-    .quantity {
+    .qty {
       display: flex;
       align-items: center;
-      gap: 9px;
+      gap: 5px;
     }
 
-    .quantity button {
-      width: 30px;
-      height: 30px;
-      border: 1px solid var(--line);
-      background: var(--paper-light);
-      color: var(--ink);
+    .qty button {
+      padding: 3px 10px;
+      margin: 0;
     }
 
     .remove {
-      border: 0;
       background: transparent;
-      color: #8b3428;
-      padding: 5px;
+      color: #853b2c;
+      border: 0;
+      padding: 4px;
     }
 
     .total {
       display: flex;
       justify-content: space-between;
-      gap: 15px;
-      border-top: 2px solid var(--brown);
-      margin-top: 20px;
+      gap: 12px;
+      font-size: 23px;
+      margin: 20px 0;
       padding-top: 15px;
-      font-size: 1.35rem;
+      border-top: 2px solid var(--detalhe);
     }
 
-    .cart-actions {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 20px;
-      justify-content: center;
+    .wide {
+      width: 100%;
+      margin: 5px 0;
     }
 
-    .cart-actions button {
-      font-size: .95rem;
-    }
-
-    .payment {
+    #payment {
       display: none;
-      margin-top: 25px;
-      border-top: 1px solid var(--line);
-      padding-top: 25px;
       text-align: center;
+      border-top: 1px solid var(--detalhe);
+      margin-top: 25px;
+      padding-top: 20px;
     }
 
-    .payment.visible { display: block; }
-
-    .payment h3 {
-      font-size: 1.5rem;
-      font-weight: normal;
+    #payment.visible {
+      display: block;
     }
 
     #qrcode {
-      display: inline-block;
-      padding: 12px;
-      background: white;
-      margin: 10px auto;
-      min-height: 20px;
+      display: flex;
+      justify-content: center;
+      margin: 18px auto;
+      min-height: 10px;
     }
 
     #pixCode {
       width: 100%;
-      max-width: 600px;
-      padding: 12px;
-      border: 1px solid var(--line);
-      background: var(--paper-light);
-      color: var(--ink);
-      margin: 10px auto;
-      display: block;
-      font-family: monospace;
-      font-size: .8rem;
+      min-height: 100px;
+      padding: 10px;
+      background: var(--claro);
+      color: var(--marrom);
+      border: 1px solid var(--detalhe);
       overflow-wrap: anywhere;
     }
 
-    .pix-note {
-      max-width: 550px;
-      margin: 12px auto;
-      font-size: .9rem;
-      color: var(--muted);
+    .notice {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--texto);
     }
 
     .about {
-      max-width: 720px;
+      max-width: 700px;
+      margin: 50px auto;
+      padding: 20px;
       text-align: center;
-      margin: 55px auto;
-      padding: 25px;
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .about h2 {
-      font-weight: normal;
-      font-size: 2rem;
+      line-height: 1.7;
     }
 
     footer {
       text-align: center;
-      padding: 30px 20px;
-      background: #e9ddc7;
-      border-top: 3px double var(--gold);
-      color: var(--brown);
-      font-size: .9rem;
+      padding: 30px 12px;
+      font-style: italic;
+      color: var(--texto);
+      border-top: 1px solid var(--detalhe);
+      background: rgba(167, 130, 93, 0.08);
     }
 
-    .footer-brand {
-      font-size: 1.6rem;
-      letter-spacing: 2px;
-    }
+    @media (max-width: 560px) {
+      nav {
+        gap: 12px;
+      }
 
-    .small {
-      font-size: .8rem;
-      color: var(--muted);
-    }
-
-    @media (max-width: 500px) {
-      nav { gap: 15px; }
-      .cart-item {
+      .cartrow {
         grid-template-columns: 1fr auto;
       }
-      .cart-item .remove {
-        grid-column: 2;
+
+      .cartrow .remove {
+        grid-column: 1 / -1;
         justify-self: end;
       }
-      .order { padding: 16px; }
-      .cart-actions .button { width: 100%; text-align: center; }
     }
   </style>
 </head>
-<body>
-  <div class="topline"></div>
 
-  <header>
-    <div class="monogram">PA</div>
+<body>
+  <header id="inicio">
+    <div class="logo" aria-label="Logotipo Panis Artis">PA</div>
     <h1>Panis Artis</h1>
-    <p class="subtitle">Feito à mão · Feito com carinho</p>
+    <p class="slogan">Arte em forma de pão</p>
+    <hr>
+    <p class="intro">
+      Feito à mão, com carinho e dedicação.
+      Descubra nossas delícias artesanais e escolha suas favoritas.
+    </p>
   </header>
 
-  <nav>
+  <nav aria-label="Navegação principal">
     <a href="#inicio">Início</a>
-    <a href="#produtos">Nossas delícias</a>
-    <a href="#pedido">Seu pedido</a>
+    <a href="#produtos">Produtos</a>
+    <a href="#pedido">Meu pedido</a>
     <a href="#historia">Nossa história</a>
   </nav>
 
-  <section class="hero" id="inicio">
-    <span class="eyebrow">Panificação artesanal</span>
-    <h2>O sabor especial das coisas feitas com carinho.</h2>
-    <p>
-      Receitas preparadas artesanalmente, com cuidado em cada detalhe
-      e aquele gostinho que transforma momentos simples em boas lembranças.
-    </p>
-    <a class="button" href="#produtos">Conheça nossos produtos</a>
-  </section>
-
   <main>
     <section id="produtos">
-      <div class="section-title">
-        <span class="eyebrow">Nosso catálogo</span>
-        <h2>Feito para saborear</h2>
-        <div class="ornament">— ✦ —</div>
-        <p class="small">Escolha suas delícias e monte seu pedido.</p>
-      </div>
-
-      <div class="products" id="productList"></div>
+      <h2>Nossas delícias</h2>
+      <p class="intro">
+        Cada receita é preparada com cuidado para deixar seu dia mais gostoso.
+      </p>
+      <hr>
+      <div class="catalog" id="catalog"></div>
     </section>
 
-    <section class="order" id="pedido">
+    <section class="panel" id="pedido">
       <h2>Seu pedido</h2>
+
       <div id="cartItems">
-        <p class="empty">Seu cesto ainda está vazio. Que tal escolher uma delícia?</p>
+        <p class="empty">
+          Seu cesto está vazio. Escolha uma delícia do nosso catálogo!
+        </p>
       </div>
 
       <div class="total">
@@ -458,213 +356,261 @@
         <strong id="total">R$ 0,00</strong>
       </div>
 
-      <div class="cart-actions">
-        <button class="button" onclick="startPayment()">Gerar Pix do pedido</button>
-        <button class="button secondary" onclick="copyOrder()">Copiar resumo do pedido</button>
-        <button class="button secondary" onclick="clearCart()">Limpar cesto</button>
-      </div>
+      <button class="wide" onclick="startPayment()">
+        Gerar Pix do pedido
+      </button>
 
-      <div class="payment" id="payment">
-        <h3>Pagamento por Pix</h3>
-        <p>Valor do pedido: <strong id="paymentTotal">R$ 0,00</strong></p>
+      <button class="wide secondary" onclick="copyOrder()">
+        Copiar resumo do pedido
+      </button>
+
+      <button class="wide secondary" onclick="clearCart()">
+        Limpar cesto
+      </button>
+
+      <div id="payment">
+        <h2>Pagamento por Pix</h2>
+        <p>Valor do pedido: <strong id="paymentTotal"></strong></p>
+
         <div id="qrcode"></div>
-        <p>Escaneie o QR Code pelo aplicativo do seu banco.</p>
-        <p class="small">Ou copie o código Pix abaixo:</p>
-        <textarea id="pixCode" rows="4" readonly aria-label="Código Pix copia e cola"></textarea>
-        <button class="button" onclick="copyPix()">Copiar código Pix</button>
-        <p class="pix-note">
+
+        <p>Escaneie o QR Code usando o aplicativo do seu banco.</p>
+        <p class="notice">Ou copie o código Pix abaixo:</p>
+
+        <textarea
+          id="pixCode"
+          readonly
+          aria-label="Código Pix copia e cola"
+        ></textarea>
+
+        <button onclick="copyPix()">Copiar código Pix</button>
+
+        <p class="notice">
           Após pagar, envie o resumo do pedido à Panis Artis.
-          O pagamento será confirmado manualmente antes da entrega.
+          O pagamento será conferido manualmente antes da entrega.
           Aguarde a confirmação do recebimento.
         </p>
       </div>
     </section>
 
     <section class="about" id="historia">
-      <span class="eyebrow">Nossa essência</span>
-      <h2>Tradição em cada detalhe</h2>
-      <div class="ornament">✦</div>
+      <h2>Nossa história</h2>
+      <hr>
       <p>
-        A Panis Artis nasceu do carinho pela panificação artesanal e
-        da vontade de compartilhar sabores especiais.
-        Cada fornada é uma oportunidade de levar um pouco desse cuidado
-        para a mesa de quem escolhe nossos produtos.
+        A Panis Artis nasceu do carinho pela panificação artesanal
+        e da vontade de compartilhar sabores especiais.
+        Acreditamos que as coisas simples, feitas com dedicação,
+        podem criar momentos inesquecíveis.
       </p>
     </section>
   </main>
 
   <footer>
-    <div class="footer-brand">Panis Artis</div>
-    <p>Feito à mão, com carinho e dedicação.</p>
+    <strong>Panis Artis</strong>
+    <p>Arte em forma de pão.</p>
     <p>© <span id="year"></span> Panis Artis</p>
   </footer>
 
   <script>
-    // ============================================
-    // PERSONALIZE AQUI OS PRODUTOS E OS PREÇOS
-    // Preços são exemplos: ajuste antes de publicar.
-    // ============================================
+    // PERSONALIZE OS PRODUTOS E OS PREÇOS NESTA LISTA.
+    // Os valores abaixo são exemplos provisórios.
     const products = [
       {
         id: 1,
         name: "Pão artesanal",
-        description: "Uma fornada de sabor e aconchego.",
+        description: "Uma delícia feita com cuidado.",
         price: 12.00,
         icon: "🍞"
       },
       {
         id: 2,
         name: "Biscoitinho amanteigado",
-        description: "Delicado, saboroso e perfeito para acompanhar um café.",
+        description: "Perfeito para acompanhar um café.",
         price: 7.99,
         icon: "🍪"
       },
       {
         id: 3,
         name: "Casadinho de goiabada",
-        description: "Uma combinação clássica e cheia de sabor.",
+        description: "Uma combinação clássica e saborosa.",
         price: 9.99,
         icon: "🥮"
       },
       {
         id: 4,
         name: "Cinnamon roll",
-        description: "Massa macia com o aroma acolhedor da canela.",
+        description: "Massa macia com aroma de canela.",
         price: 2.00,
         icon: "🥐"
       },
       {
         id: 5,
         name: "Amanteigado de maizena",
-        description: "Leve, delicado e irresistível.",
+        description: "Leve, delicado e saboroso.",
         price: 7.99,
         icon: "🍪"
       },
       {
         id: 6,
         name: "Biscoitos da casa",
-        description: "Uma delícia artesanal para dividir com quem você gosta.",
+        description: "Uma opção artesanal para compartilhar.",
         price: 10.00,
         icon: "🍪"
       }
     ];
 
-    // ============================================
-    // CONFIGURAÇÃO DO PIX
-    // Substitua a chave de exemplo pela chave Pix
-    // correta da Panis Artis antes de usar.
-    // ============================================
+    // CONFIGURAÇÃO PIX:
+    // Troque a chave de exemplo pela chave Pix correta.
+    // Não publique o site para receber pagamentos sem testar.
     const PIX_KEY = "SUA-CHAVE-PIX-AQUI";
     const PIX_RECEIVER = "PANIS ARTIS";
     const PIX_CITY = "CASIMIRO DE ABREU";
 
     const cart = {};
 
-    const money = value => value.toLocaleString("pt-BR", {
-      style: "currency",
-      currency: "BRL"
-    });
-
-    function renderProducts() {
-      const list = document.getElementById("productList");
-      list.innerHTML = products.map(p => `
-        <article class="product">
-          <div class="product-icon">${p.icon}</div>
-          <h3>${escapeHTML(p.name)}</h3>
-          <p>${escapeHTML(p.description)}</p>
-          <strong class="price">${money(p.price)}</strong>
-          <button class="add-button" onclick="addToCart(${p.id})">
-            + Adicionar ao cesto
-          </button>
-        </article>
-      `).join("");
+    function money(value) {
+      return value.toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL"
+      });
     }
 
     function escapeHTML(value) {
-      return String(value).replace(/[&<>"']/g, char => ({
-        "&": "&amp;",
-        "<": "&lt;",
-        ">": "&gt;",
-        '"': "&quot;",
-        "'": "&#039;"
-      })[char]);
+      return String(value).replace(/[&<>"']/g, function (char) {
+        const replacements = {
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#039;"
+        };
+        return replacements[char];
+      });
+    }
+
+    function renderProducts() {
+      const catalog = document.getElementById("catalog");
+
+      catalog.innerHTML = products.map(function (product) {
+        return `
+          <article class="product">
+            <div class="food" aria-hidden="true">${product.icon}</div>
+            <h3>${escapeHTML(product.name)}</h3>
+            <p>${escapeHTML(product.description)}</p>
+            <div class="price">${money(product.price)}</div>
+            <button onclick="addToCart(${product.id})">
+              Adicionar ao pedido
+            </button>
+          </article>
+        `;
+      }).join("");
     }
 
     function addToCart(id) {
       cart[id] = (cart[id] || 0) + 1;
+      hidePayment();
       renderCart();
-      document.getElementById("payment").classList.remove("visible");
     }
 
     function changeQuantity(id, amount) {
       cart[id] = (cart[id] || 0) + amount;
-      if (cart[id] <= 0) delete cart[id];
+
+      if (cart[id] <= 0) {
+        delete cart[id];
+      }
+
+      hidePayment();
       renderCart();
-      document.getElementById("payment").classList.remove("visible");
     }
 
     function removeItem(id) {
       delete cart[id];
+      hidePayment();
       renderCart();
-      document.getElementById("payment").classList.remove("visible");
     }
 
     function getTotal() {
-      return products.reduce((sum, p) => sum + p.price * (cart[p.id] || 0), 0);
+      return products.reduce(function (sum, product) {
+        return sum + product.price * (cart[product.id] || 0);
+      }, 0);
     }
 
     function renderCart() {
       const container = document.getElementById("cartItems");
-      const selected = products.filter(p => cart[p.id]);
+      const selected = products.filter(function (product) {
+        return cart[product.id] > 0;
+      });
 
-      if (!selected.length) {
-        container.innerHTML = '<p class="empty">Seu cesto ainda está vazio. Que tal escolher uma delícia?</p>';
+      if (selected.length === 0) {
+        container.innerHTML = `
+          <p class="empty">
+            Seu cesto está vazio. Escolha uma delícia do nosso catálogo!
+          </p>
+        `;
       } else {
-        container.innerHTML = selected.map(p => `
-          <div class="cart-item">
-            <div>
-              <span class="cart-name">${escapeHTML(p.name)}</span>
-              <span class="cart-price">${money(p.price)} cada</span>
+        container.innerHTML = selected.map(function (product) {
+          return `
+            <div class="cartrow">
+              <div>
+                <strong>${escapeHTML(product.name)}</strong>
+                <div class="notice">${money(product.price)} cada</div>
+              </div>
+
+              <div class="qty">
+                <button
+                  aria-label="Diminuir quantidade"
+                  onclick="changeQuantity(${product.id}, -1)"
+                >−</button>
+
+                <span>${cart[product.id]}</span>
+
+                <button
+                  aria-label="Aumentar quantidade"
+                  onclick="changeQuantity(${product.id}, 1)"
+                >+</button>
+              </div>
+
+              <button
+                class="remove"
+                onclick="removeItem(${product.id})"
+              >Remover</button>
             </div>
-            <div class="quantity">
-              <button aria-label="Diminuir quantidade de ${escapeHTML(p.name)}" onclick="changeQuantity(${p.id}, -1)">−</button>
-              <span>${cart[p.id]}</span>
-              <button aria-label="Aumentar quantidade de ${escapeHTML(p.name)}" onclick="changeQuantity(${p.id}, 1)">+</button>
-            </div>
-            <button class="remove" onclick="removeItem(${p.id})">Remover</button>
-          </div>
-        `).join("");
+          `;
+        }).join("");
       }
 
       document.getElementById("total").textContent = money(getTotal());
     }
 
-    function getOrderText() {
-      const selected = products.filter(p => cart[p.id]);
-      if (!selected.length) return "";
+    function hidePayment() {
+      document.getElementById("payment").classList.remove("visible");
+      document.getElementById("qrcode").innerHTML = "";
+      document.getElementById("pixCode").value = "";
+    }
 
-      const lines = selected.map(p =>
-        `${cart[p.id]}x ${p.name} — ${money(p.price * cart[p.id])}`
-      );
+    function getOrderText() {
+      const selected = products.filter(function (product) {
+        return cart[product.id] > 0;
+      });
+
+      if (selected.length === 0) {
+        return "";
+      }
+
+      const lines = selected.map(function (product) {
+        return cart[product.id] + "x " + product.name +
+          " — " + money(product.price * cart[product.id]);
+      });
 
       return [
         "PANIS ARTIS — RESUMO DO PEDIDO",
         "",
         ...lines,
         "",
-        `TOTAL: ${money(getTotal())}`,
+        "TOTAL: " + money(getTotal()),
         "",
-        "Por favor, confirme a disponibilidade e a entrega com a Panis Artis."
+        "Por favor, confirme a disponibilidade e a entrega."
       ].join("\n");
-    }
-
-    async function copyOrder() {
-      const text = getOrderText();
-      if (!text) {
-        alert("Adicione pelo menos um produto ao cesto!");
-        return;
-      }
-      await copyText(text, "Resumo do pedido copiado!");
     }
 
     async function copyText(text, successMessage) {
@@ -675,9 +621,10 @@
         const field = document.createElement("textarea");
         field.value = text;
         field.style.position = "fixed";
-        field.style.opacity = "0";
+        field.style.left = "-9999px";
         document.body.appendChild(field);
         field.select();
+
         const copied = document.execCommand("copy");
         field.remove();
 
@@ -689,13 +636,33 @@
       }
     }
 
-    function clearCart() {
-      if (!Object.keys(cart).length) return;
-      if (!confirm("Deseja limpar todos os produtos do cesto?")) return;
+    async function copyOrder() {
+      const orderText = getOrderText();
 
-      Object.keys(cart).forEach(id => delete cart[id]);
+      if (!orderText) {
+        alert("Adicione pelo menos um produto ao pedido!");
+        return;
+      }
+
+      await copyText(orderText, "Resumo do pedido copiado!");
+    }
+
+    function clearCart() {
+      if (Object.keys(cart).length === 0) {
+        alert("O cesto já está vazio.");
+        return;
+      }
+
+      if (!confirm("Deseja remover todos os produtos do cesto?")) {
+        return;
+      }
+
+      Object.keys(cart).forEach(function (id) {
+        delete cart[id];
+      });
+
+      hidePayment();
       renderCart();
-      document.getElementById("payment").classList.remove("visible");
     }
 
     function tlv(id, value) {
@@ -710,9 +677,12 @@
         crc ^= payload.charCodeAt(i) << 8;
 
         for (let bit = 0; bit < 8; bit++) {
-          crc = (crc & 0x8000)
-            ? ((crc << 1) ^ 0x1021)
-            : (crc << 1);
+          if (crc & 0x8000) {
+            crc = (crc << 1) ^ 0x1021;
+          } else {
+            crc <<= 1;
+          }
+
           crc &= 0xFFFF;
         }
       }
@@ -720,13 +690,24 @@
       return crc.toString(16).toUpperCase().padStart(4, "0");
     }
 
+    function normalizeText(text, maxLength) {
+      return text.normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^A-Za-z0-9 ]/g, "")
+        .trim()
+        .slice(0, maxLength);
+    }
+
     function buildPixPayload(amount) {
       const key = PIX_KEY.trim();
+
       if (!key || key === "SUA-CHAVE-PIX-AQUI") {
-        throw new Error("Configure a chave Pix da Panis Artis no código antes de gerar pagamentos.");
+        throw new Error(
+          "A chave Pix ainda não foi configurada no código."
+        );
       }
 
-      if (amount <= 0 || !Number.isFinite(amount)) {
+      if (!Number.isFinite(amount) || amount <= 0) {
         throw new Error("O valor do pedido não é válido.");
       }
 
@@ -734,33 +715,20 @@
         tlv("00", "BR.GOV.BCB.PIX") +
         tlv("01", key);
 
-      const merchantInfo = tlv("26", merchantAccount);
-      const amountText = amount.toFixed(2);
-      const safeName = PIX_RECEIVER.normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
-        .replace(/[^A-Za-z0-9 ]/g, "")
-        .slice(0, 25);
-
-      const safeCity = PIX_CITY.normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
-        .replace(/[^A-Za-z0-9 ]/g, "")
-        .slice(0, 15);
-
-      let payload =
+      const payload =
         tlv("00", "01") +
         tlv("01", "12") +
-        merchantInfo +
+        tlv("26", merchantAccount) +
         tlv("52", "0000") +
         tlv("53", "986") +
-        tlv("54", amountText) +
+        tlv("54", amount.toFixed(2)) +
         tlv("58", "BR") +
-        tlv("59", safeName) +
-        tlv("60", safeCity) +
+        tlv("59", normalizeText(PIX_RECEIVER, 25)) +
+        tlv("60", normalizeText(PIX_CITY, 15)) +
         tlv("62", tlv("05", "***")) +
         "6304";
 
-      payload += crc16(payload);
-      return payload;
+      return payload + crc16(payload);
     }
 
     function startPayment() {
@@ -772,12 +740,15 @@
       }
 
       if (typeof QRCode === "undefined") {
-        alert("Não foi possível carregar o gerador de QR Code. Confira sua conexão e tente novamente.");
+        alert(
+          "O gerador de QR Code não carregou. Verifique sua conexão e tente novamente."
+        );
         return;
       }
 
       try {
         const payload = buildPixPayload(total);
+
         document.getElementById("paymentTotal").textContent = money(total);
         document.getElementById("pixCode").value = payload;
 
@@ -803,11 +774,16 @@
 
     async function copyPix() {
       const payload = document.getElementById("pixCode").value;
+
       if (!payload) {
         alert("Gere o Pix primeiro.");
         return;
       }
-      await copyText(payload, "Código Pix copiado! Abra o aplicativo do seu banco para conferir o pagamento.");
+
+      await copyText(
+        payload,
+        "Código copiado! Confira os dados no aplicativo do seu banco antes de pagar."
+      );
     }
 
     document.getElementById("year").textContent = new Date().getFullYear();
@@ -817,4 +793,3 @@
   </script>
 </body>
 </html>
-
